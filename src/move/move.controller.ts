@@ -3,7 +3,7 @@ import { MoveService } from './move.service';
 import { CreateMoveDto } from './dto/create-move.dto';
 import { UpdateMoveDto } from './dto/update-move.dto';
 
-@Controller('move')
+@Controller('api/moves/')
 export class MoveController {
   constructor(private readonly moveService: MoveService) {}
 

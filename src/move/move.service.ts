@@ -1,34 +1,34 @@
 import { Injectable } from '@nestjs/common';
 import { CreateMoveDto } from './dto/create-move.dto';
 import { UpdateMoveDto } from './dto/update-move.dto';
-import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 import { Move } from './entities/move.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
 export class MoveService {
-  // constructor(
-  //   @InjectRepository(Move) 
-  //   private gameRepository: Repository<Move>,
-  // ) {}
+  constructor(
+    @InjectRepository(Move) 
+    private moveRepository: Repository<Move>,
+  ) {}
 
   create(createMoveDto: CreateMoveDto) {
-    return 'This action adds a new move';
+    return this.moveRepository.save(createMoveDto);
   }
 
   findAll() {
-    return `This action returns all move`;
+    return this.moveRepository.find();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} move`;
+    return this.moveRepository.findOneById(id);
   }
 
   update(id: number, updateMoveDto: UpdateMoveDto) {
-    return `This action updates a #${id} move`;
+    return this.moveRepository.update(id, updateMoveDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} move`;
+    return this.moveRepository.delete(id);
   }
 }
